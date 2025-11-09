@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* Base Options */
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    /* Output */
+    "outDir": "./dist",
+    "sourceMap": true,
+
+    /* Strictness */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type-checking */
+    "types": ["node"]
+  },
+
+  /* ts-node specific settings to fix the seed script error */
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+
+  /* Tell TS to only compile files in the src folder */
+  "include": ["src/**/*", "prisma/seed.ts"],
+  "exclude": ["node_modules"]
+}

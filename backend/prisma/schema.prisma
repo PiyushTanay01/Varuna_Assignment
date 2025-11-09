@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Route {
+  id              String   @id @default(cuid())
+  route_id        String   @unique 
+  year            Int
+  ghg_intensity   Float  
+  is_baseline     Boolean  @default(false)
+
+  vesselType      String
+  fuelType        String
+  fuelConsumption Float   
+  distance        Float   
+  totalEmissions  Float    
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ShipCompliance {
+  id         String   @id @default(cuid())
+  ship_id    String
+  year       Int
+  cb_gco2eq  Float   
+
+  @@unique([ship_id, year])
+}
+
+model BankEntry {
+  id           String   @id @default(cuid())
+  ship_id      String
+  year         Int      
+  amount_gco2eq Float    
+  createdAt    DateTime @default(now())
+}
+
+model Pool {
+  id        String        @id @default(cuid())
+  year      Int
+  createdAt DateTime      @default(now())
+  members   PoolMember[]
+}
+
+model PoolMember {
+  id        String   @id @default(cuid())
+  pool      Pool     @relation(fields: [pool_id], references: [id])
+  pool_id   String
+  ship_id   String
+  cb_before Float
+  cb_after  Float
+
+  @@unique([pool_id, ship_id])
+}
