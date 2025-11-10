@@ -4,8 +4,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Start seeding...');
 
-  // --- 1. CLEAR ALL DATA ---
-  // We must delete in the correct order
   await prisma.poolMember.deleteMany();
   await prisma.pool.deleteMany();
   await prisma.bankEntry.deleteMany();
@@ -14,9 +12,7 @@ async function main() {
 
   console.log('Old data cleared.');
 
-  // --- 2. CREATE ROUTES ---
-
-  // Create one baseline route
+  
   await prisma.route.create({
     data: {
       route_id: 'R1000',

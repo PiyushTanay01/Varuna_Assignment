@@ -1,3 +1,4 @@
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
 -- CreateTable
 CREATE TABLE "Route" (
     "id" TEXT NOT NULL,
@@ -68,3 +69,4 @@ CREATE UNIQUE INDEX "PoolMember_pool_id_ship_id_key" ON "PoolMember"("pool_id", 
 
 -- AddForeignKey
 ALTER TABLE "PoolMember" ADD CONSTRAINT "PoolMember_pool_id_fkey" FOREIGN KEY ("pool_id") REFERENCES "Pool"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
